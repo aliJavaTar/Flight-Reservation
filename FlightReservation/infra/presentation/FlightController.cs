@@ -1,6 +1,5 @@
 using FlightReservation.domain.useCase;
 using FlightReservation.infra.presentation.dto;
-using FlightReservation.models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightReservation.infra.presentation;
@@ -15,7 +14,6 @@ public class FlightController(AddFlightByAdmin addFlightByAdmin) : ControllerBas
         var flightResponse = await addFlightByAdmin.add(dto);
         return Ok();
         // return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.Id }, flightResponse);
-
     }
     // [HttpGet("{id}")]
     // public async Task<IActionResult> GetFlightById(int id)
