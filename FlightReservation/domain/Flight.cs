@@ -9,7 +9,6 @@ public class Flight
     public DateTime DepartureTime { get; private set; }
     public DateTime ArrivalTime { get; private set; }
     public int AvailableSeats { get; private set; }
-    public decimal Price { get; private set; }
     public List<Ticket> Tickets { get; private set; }
 
     private Flight()
@@ -78,11 +77,7 @@ public class Flight
             return this;
         }
 
-        public FlightBuilder SetPrice(decimal price)
-        {
-            _flight.Price = price;
-            return this;
-        }
+  
 
         public FlightBuilder SetTickets(List<Ticket> tickets)
         {

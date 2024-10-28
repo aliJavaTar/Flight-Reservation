@@ -8,7 +8,6 @@ public class FlightMapper
     {
         return new Flight.FlightBuilder()
             .SetFlightNumber(flightDto.FlightNumber)
-            .SetPrice(flightDto.Price)
             .SetAvailableSeats(flightDto.AvailableSeats)
             .SetArrivalCity(flightDto.ArrivalCity)
             .SetDepartureCity(flightDto.DepartureCity)
@@ -28,7 +27,6 @@ public class FlightMapper
             DepartureTime = flight.DepartureTime,
             ArrivalTime = flight.ArrivalTime,
             AvailableSeats = flight.AvailableSeats,
-            Price = flight.Price
         };
     }
 }

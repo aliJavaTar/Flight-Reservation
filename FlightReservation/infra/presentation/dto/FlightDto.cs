@@ -12,8 +12,5 @@ public class FlightDto
 
     [Range(1, 100, ErrorMessage = "Please enter a number between 1 and 100")]
     public int AvailableSeats { get; init; }
-
-
-    [Range(0, double.MaxValue, ErrorMessage = "Price cannot be negative.")]
-    public required decimal Price { get; init; }
+    
 }
