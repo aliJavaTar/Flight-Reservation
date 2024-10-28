@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra;
 
-public class Context : DbContext
+public class Db : DbContext
 {
     public DbSet<Flight> Flights { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
