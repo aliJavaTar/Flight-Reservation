@@ -1,5 +1,6 @@
 using FlightReservation.infra.data;
 using FlightReservation.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository;
 
@@ -14,6 +15,11 @@ public class FlightRepository(Db db) : IFlightRepository
         }
 
         return flight;
+    }
+
+    public async Task<Flight> FindById(int id)
+    {
+        return await db.Flights.FindAsync(id) ?? throw new Exception("Flight is not found");
     }
 
     private async Task<bool> IsNotCommit()
