@@ -1,7 +1,7 @@
 using FlightReservation.models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlightReservation.infra;
+namespace FlightReservation.infra.data;
 
 public class Db : DbContext
 {

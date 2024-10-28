@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FlightReservation.infra.presentation;
+namespace FlightReservation.infra.presentation.dto;
 
 public class FlightRequest
 {
