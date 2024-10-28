@@ -1,4 +1,4 @@
-using FlightReservation.models;
+using FlightReservation.domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.data;

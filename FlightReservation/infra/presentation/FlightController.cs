@@ -16,6 +16,13 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
         return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.FlightId }, flightResponse);
     }
 
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] FlightUpdateRequest request)
+    {
+        var flightResponse = await addAndModify.Update(request);
+        return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.FlightId }, flightResponse);
+    }
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFlightById(int id)

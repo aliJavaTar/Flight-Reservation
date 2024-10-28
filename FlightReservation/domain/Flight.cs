@@ -1,15 +1,15 @@
-namespace FlightReservation.models;
+namespace FlightReservation.domain;
 
 public class Flight
 {
     public int Id { get; set; }
-    public string FlightNumber { get; private set; }
-    public string DepartureCity { get; private set; }
-    public string ArrivalCity { get; private set; }
-    public DateTime DepartureTime { get; private set; }
-    public DateTime ArrivalTime { get; private set; }
-    public int AvailableSeats { get; private set; }
-    public List<Ticket> Tickets { get; private set; }
+    public string FlightNumber { get; set; }
+    public string DepartureCity { get; set; }
+    public string ArrivalCity { get; set; }
+    public DateTime DepartureTime { get; set; }
+    public DateTime ArrivalTime { get; set; }
+    public int AvailableSeats { get; set; }
+    public List<Ticket> Tickets { get; set; }
 
     private Flight()
     {
@@ -77,7 +77,6 @@ public class Flight
             return this;
         }
 
-  
 
         public FlightBuilder SetTickets(List<Ticket> tickets)
         {
@@ -91,29 +90,29 @@ public class Flight
             IsValidCity(_flight.ArrivalCity, _flight.DepartureCity);
             return _flight;
         }
+    }
 
-        private void CheckDepartureTimeAndArrivalTime(DateTime departureTime, DateTime arrivalTime)
+    public static void CheckDepartureTimeAndArrivalTime(DateTime departureTime, DateTime arrivalTime)
+    {
+        if (arrivalTime <= departureTime)
         {
-            if (Equals(arrivalTime <= departureTime))
-            {
-                throw new ArgumentException("Invalid arrival time");
-            }
+            throw new ArgumentException("Invalid arrival time");
         }
+    }
 
-        private static void IsValidData(DateTime dateTime)
+    public static void IsValidData(DateTime dateTime)
+    {
+        if (dateTime < DateTime.Now)
         {
-            if (dateTime < DateTime.Now)
-            {
-                throw new ArgumentException("Invalid departure time");
-            }
+            throw new ArgumentException("Invalid departure time");
         }
+    }
 
-        private static void IsValidCity(string arrivalCity, string departureCity)
+    public static void IsValidCity(string arrivalCity, string departureCity)
+    {
+        if (arrivalCity.Equals(departureCity))
         {
-            if (arrivalCity.Equals(departureCity))
-            {
-                throw new ArgumentException("Invalid departure city and arrival city are the same");
-            }
+            throw new ArgumentException("Invalid departure city and arrival city are the same");
         }
     }
 }

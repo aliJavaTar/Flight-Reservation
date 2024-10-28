@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FlightReservation.infra.presentation.dto;
 
-public class FlightDto
+public class FlightDto 
 {
     public required string FlightNumber { get; init; }
     public required string DepartureCity { get; init; }

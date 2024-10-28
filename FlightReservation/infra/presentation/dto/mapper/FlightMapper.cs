@@ -1,4 +1,4 @@
-using FlightReservation.models;
+using FlightReservation.domain;
 
 namespace FlightReservation.infra.presentation.dto.mapper;
 
@@ -16,6 +16,19 @@ public class FlightMapper
             .Build();
     }
 
+    // public Flight ConvertToUpdate(FlightUpdateRequest flightDto)
+    // {
+    //     return new Flight.FlightBuilder()
+    //         .SetFlightNumber(flightDto.FlightNumber)
+    //         .SetAvailableSeats(flightDto.AvailableSeats)
+    //         .SetArrivalCity(flightDto.ArrivalCity)
+    //         .SetDepartureCity(flightDto.DepartureCity)
+    //         .SetArrivalTime(flightDto.ArrivalTime)
+    //         .SetDepartureTime(flightDto.DepartureTime)
+    //         .Build();
+    // }
+   
+    
     public FlightResponse ConvertToResponse(Flight flight)
     {
         return new FlightResponse

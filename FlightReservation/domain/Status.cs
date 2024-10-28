@@ -1,4 +1,4 @@
-namespace FlightReservation.models;
+namespace FlightReservation.domain;
 
 public enum Status
 {

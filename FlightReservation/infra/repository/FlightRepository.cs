@@ -1,5 +1,5 @@
+using FlightReservation.domain;
 using FlightReservation.infra.data;
-using FlightReservation.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository;
@@ -20,6 +20,16 @@ public class FlightRepository(Db db) : IFlightRepository
     public async Task<Flight> FindById(int id)
     {
         return await db.Flights.FindAsync(id) ?? throw new Exception("Flight is not found");
+    }
+
+    public async Task<Flight> UpdateAsync(Flight flight)
+    {
+        if (await IsNotCommit())
+        {
+            throw new ApplicationException("User is not created");
+        }
+
+        return flight;
     }
 
     private async Task<bool> IsNotCommit()
