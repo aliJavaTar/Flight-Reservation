@@ -10,7 +10,7 @@ public class FlightController : ControllerBase
 {
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] FlightRequest request)
+    public async Task<IActionResult> Create([FromBody] FlightDto dto)
     {
         
         return Ok();
