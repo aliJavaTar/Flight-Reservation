@@ -71,8 +71,8 @@ public class FlightBuilder
 
     public Flight Build()
     {
-        _flight.CheckDepartureTimeAndArrivalTime(_flight.DepartureTime, _flight.ArrivalTime);
-        _flight.IsValidCity(_flight.ArrivalCity, _flight.DepartureCity);
+        _flight.CheckDepartureTimeAndArrivalTime();
+        _flight.IsValidCity();
         return _flight;
     }
 }

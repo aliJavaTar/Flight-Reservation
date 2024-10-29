@@ -27,7 +27,7 @@ public class AddAndModify(IFlightRepository flightRepository, FlightMapper fligh
             flight.DepartureCity = flightDto.DepartureCity;
         }
 
-        flight.IsValidCity(flight.ArrivalCity, flight.DepartureCity);
+        flight.IsValidCity();
 
         if (flightDto.FlightNumber != null)
         {
@@ -49,7 +49,7 @@ public class AddAndModify(IFlightRepository flightRepository, FlightMapper fligh
             flight.ArrivalTime = (DateTime)flightDto.DepartureTime;
         }
 
-        flight.CheckDepartureTimeAndArrivalTime(flight.ArrivalTime, flight.DepartureTime);
+        flight.CheckDepartureTimeAndArrivalTime();
 
         var updatedFlight = await flightRepository.UpdateAsync(flight);
         return flightMapper.ConvertToResponse(updatedFlight);
