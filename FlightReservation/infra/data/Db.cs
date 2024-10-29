@@ -21,7 +21,6 @@ public class Db : DbContext
             .OnDelete(DeleteBehavior.Cascade);
 
 
-        // modelBuilder.Entity<Flight>().Property(f => f.Price).IsRequired().HasColumnType("decimal(7,2)");
         modelBuilder.Entity<Flight>().Property(f => f.FlightNumber).IsUnicode().IsRequired();
         modelBuilder.Entity<Flight>().Property(f => f.DepartureCity).IsRequired();
         modelBuilder.Entity<Flight>().Property(f => f.ArrivalCity).IsRequired();
