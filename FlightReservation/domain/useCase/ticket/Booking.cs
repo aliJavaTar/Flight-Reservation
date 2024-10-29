@@ -9,16 +9,8 @@ public class Booking(ITicketRepository ticketRepository, TicketMapper mapper)
     public async Task<TicketDto> BookingTicket(TicketBookingRequest ticketDto)
     {
         var ticket = await ticketRepository.FindByPassengerName(ticketDto.PassengerName);
-        if (ticket.Flight.AvailableSeats == 0)
-        {
-            throw new Exception("No available seats");
-        }
-
-        ticket.Flight.AvailableSeats--;
-        ticket.Status = Status.Resrved;
-
+        ticket.Booking();
         ticketRepository.Update();
-
         return mapper.ConvertToDto(ticket);
     }
 }

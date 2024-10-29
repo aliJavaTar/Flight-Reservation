@@ -6,7 +6,7 @@ public class TicketMapper
 {
     public Ticket ConvertToEntity(TicketDto dto)
     {
-        return new Ticket.TicketBuilder()
+        return new TicketBuilder()
             .SetFlightId(dto.FlightId)
             .SetPrice(dto.Price)
             .SetStatus(Status.Panding)
