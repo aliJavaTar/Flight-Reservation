@@ -1,5 +1,3 @@
-using FlightReservation.domain.useCase.ticket;
-
 namespace FlightReservation.domain;
 
 public class Ticket
