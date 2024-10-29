@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FlightReservation.presentation;
 
 [ApiController]
-[Route("(api/vi/flights)")]
+[Route("api/vi/flights")]
 public class FlightController(AddAndModify addAndModify, Search search) : ControllerBase
 {
     [HttpPost]

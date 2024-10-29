@@ -1,4 +1,5 @@
 using FlightReservation.infra.repository;
+using FlightReservation.infra.repository.flight;
 using FlightReservation.presentation.dto.flight;
 using FlightReservation.presentation.dto.flight.mapper;
 

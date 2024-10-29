@@ -1,7 +1,7 @@
 using FlightReservation.domain;
 using FlightReservation.presentation.dto.flight;
 
-namespace FlightReservation.infra.repository;
+namespace FlightReservation.infra.repository.flight;
 
 public interface IFlightRepository
 {

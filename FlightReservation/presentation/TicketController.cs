@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FlightReservation.presentation;
 
 [ApiController]
-[Route("(/tickets)")]
+[Route("tickets")]
 public class TicketController(AddAndModifyTicket addAndModifyTicket, Booking booking, Cancelling cancelling)
     : ControllerBase
 {
@@ -16,7 +16,7 @@ public class TicketController(AddAndModifyTicket addAndModifyTicket, Booking boo
         return Ok();
     }
 
-    [HttpPut("/booking")]
+    [HttpPut]
     public async Task<IActionResult> Booking([FromBody] TicketBookingRequest request)
     {
         await booking.BookingTicket(request);

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository.flight;
 
-public class FlightRepository(Db db) : IFlightRepository
+public class FlightRepository(DataBase dataBase) : IFlightRepository
 {
     public async Task<Flight> CreateAsync(Flight flight)
     {
-        await db.Flights.AddAsync(flight);
+        await dataBase.Flights.AddAsync(flight);
         if (await IsNotCommit())
         {
             throw new Exception("Flight is not created");
@@ -20,13 +20,13 @@ public class FlightRepository(Db db) : IFlightRepository
 
     public async Task<Flight> FindById(int id)
     {
-        return await db.Flights.FindAsync(id) ?? throw new Exception("Flight is not found");
+        return await dataBase.Flights.FindAsync(id) ?? throw new Exception("Flight is not found");
     }
 
     public async Task Remove(int id)
     {
         var flight = await FindById(id);
-        db.Flights.Remove(flight);
+        dataBase.Flights.Remove(flight);
     }
 
     public async Task<Flight> UpdateAsync(Flight flight)
@@ -41,7 +41,7 @@ public class FlightRepository(Db db) : IFlightRepository
 
     public Task<List<Flight>> GetAllFlightsFilter(FlightSearchDto flightSearchDto)
     {
-        var queryable = db.Flights.AsQueryable();
+        var queryable = dataBase.Flights.AsQueryable();
         if (!string.IsNullOrEmpty(flightSearchDto.FlightNumber))
         {
             queryable = queryable.Where(flight => flight.FlightNumber == flightSearchDto.FlightNumber);
@@ -94,6 +94,6 @@ public class FlightRepository(Db db) : IFlightRepository
 
     private async Task<bool> IsNotCommit()
     {
-        return await db.SaveChangesAsync() == 0;
+        return await dataBase.SaveChangesAsync() == 0;
     }
 }

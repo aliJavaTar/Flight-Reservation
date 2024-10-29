@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.data;
 
-public class Db : DbContext
+public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
 {
     public DbSet<Flight> Flights { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
 
-
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,7 +32,5 @@ public class Db : DbContext
         modelBuilder.Entity<Ticket>().Property(t => t.Status).IsRequired();
         modelBuilder.Entity<Ticket>().Property(t => t.PassengerName).IsRequired();
         modelBuilder.Entity<Ticket>().Property(t => t.BookingDate).IsRequired();
-
-
     }
 }

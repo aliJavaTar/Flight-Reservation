@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository;
 
-public class TicketRepository(Db db) : ITicketRepository
+public class TicketRepository(DataBase dataBase) : ITicketRepository
 {
     public async Task<Ticket> Add(Ticket ticket)
     {
-        await db.Tickets.AddAsync(ticket);
+        await dataBase.Tickets.AddAsync(ticket);
         if (await IsNotCommit())
         {
             throw new Exception("Ticket is not created");
@@ -19,19 +19,19 @@ public class TicketRepository(Db db) : ITicketRepository
 
     public async Task<Ticket> FindById(int ticketId)
     {
-        return await db.Tickets.FindAsync(ticketId) ?? throw new NullReferenceException("Ticket not found");
+        return await dataBase.Tickets.FindAsync(ticketId) ?? throw new NullReferenceException("Ticket not found");
     }
 
 
     public async Task<Ticket> FindByPassengerName(string passengerName)
     {
-        var ticketFound = await db.Tickets.FirstOrDefaultAsync(ticket => ticket.PassengerName == passengerName);
+        var ticketFound = await dataBase.Tickets.FirstOrDefaultAsync(ticket => ticket.PassengerName == passengerName);
         return ticketFound ?? throw new Exception("Ticket not found");
     }
 
     private async Task<bool> IsNotCommit()
     {
-        return await db.SaveChangesAsync() == 0;
+        return await dataBase.SaveChangesAsync() == 0;
     }
 
     public async void Update()
