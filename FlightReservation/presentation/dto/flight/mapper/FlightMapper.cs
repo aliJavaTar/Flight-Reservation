@@ -1,4 +1,5 @@
 using FlightReservation.domain;
+using FlightReservation.presentation.dto.flight;
 
 namespace FlightReservation.infra.presentation.dto.mapper;
 

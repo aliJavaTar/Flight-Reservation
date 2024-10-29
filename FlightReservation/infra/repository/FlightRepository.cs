@@ -1,5 +1,6 @@
 using FlightReservation.domain;
 using FlightReservation.infra.data;
+using FlightReservation.presentation.dto.flight;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository;
@@ -30,6 +31,11 @@ public class FlightRepository(Db db) : IFlightRepository
         }
 
         return flight;
+    }
+
+    public Task<List<Flight>> GetAllFlightsFilter(FlightSearchDto flightSearchDto)
+    {
+        throw new NotImplementedException();
     }
 
     private async Task<bool> IsNotCommit()

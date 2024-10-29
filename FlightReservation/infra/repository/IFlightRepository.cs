@@ -1,4 +1,5 @@
 using FlightReservation.domain;
+using FlightReservation.presentation.dto.flight;
 
 namespace FlightReservation.infra.repository;
 
@@ -9,4 +10,6 @@ public interface IFlightRepository
 
 
     Task<Flight> UpdateAsync(Flight flight);
+    
+    Task<List<Flight>> GetAllFlightsFilter(FlightSearchDto flightSearchDto);
 }

@@ -1,9 +1,8 @@
-using FlightReservation.domain.useCase;
 using FlightReservation.domain.useCase.flight;
-using FlightReservation.infra.presentation.dto;
+using FlightReservation.presentation.dto.flight;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlightReservation.infra.presentation;
+namespace FlightReservation.presentation;
 
 [ApiController]
 [Route("(api/vi/flights)")]

@@ -1,6 +1,7 @@
 using FlightReservation.infra.presentation.dto;
 using FlightReservation.infra.presentation.dto.mapper;
 using FlightReservation.infra.repository;
+using FlightReservation.presentation.dto.flight;
 
 namespace FlightReservation.domain.useCase.flight;
 

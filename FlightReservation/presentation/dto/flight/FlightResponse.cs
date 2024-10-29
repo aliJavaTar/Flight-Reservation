@@ -1,4 +1,4 @@
-namespace FlightReservation.infra.presentation.dto;
+namespace FlightReservation.presentation.dto.flight;
 
 public class FlightResponse : FlightDto
 {
