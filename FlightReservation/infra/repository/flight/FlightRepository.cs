@@ -3,7 +3,7 @@ using FlightReservation.infra.data;
 using FlightReservation.presentation.dto.flight;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlightReservation.infra.repository;
+namespace FlightReservation.infra.repository.flight;
 
 public class FlightRepository(Db db) : IFlightRepository
 {
@@ -21,6 +21,12 @@ public class FlightRepository(Db db) : IFlightRepository
     public async Task<Flight> FindById(int id)
     {
         return await db.Flights.FindAsync(id) ?? throw new Exception("Flight is not found");
+    }
+
+    public async Task Remove(int id)
+    {
+        var flight = await FindById(id);
+        db.Flights.Remove(flight);
     }
 
     public async Task<Flight> UpdateAsync(Flight flight)
@@ -50,6 +56,7 @@ public class FlightRepository(Db db) : IFlightRepository
         {
             queryable = queryable.Where(flight => flight.ArrivalCity == flightSearchDto.ArrivalCity);
         }
+
         if (flightSearchDto.DepartureTime.HasValue)
         {
             queryable = queryable.Where(f => f.DepartureTime.Date == flightSearchDto.DepartureTime.Value.Date);
@@ -59,6 +66,7 @@ public class FlightRepository(Db db) : IFlightRepository
         {
             queryable = queryable.Where(f => f.ArrivalTime.Date == flightSearchDto.ArrivalTime.Value.Date);
         }
+
         queryable = (flightSearchDto.SortBy, flightSearchDto.SortOrder) switch
         {
             (SortBy.FlightNumber, SortOrder.Descending) => queryable.OrderByDescending(f => f.FlightNumber),
@@ -74,14 +82,14 @@ public class FlightRepository(Db db) : IFlightRepository
             (SortBy.ArrivalTime, SortOrder.Ascending) => queryable.OrderBy(f => f.ArrivalTime),
 
             (SortBy.DepartureTime, SortOrder.Descending) => queryable.OrderByDescending(f => f.DepartureTime),
-            _ => queryable.OrderBy(f => f.Id) 
+            _ => queryable.OrderBy(f => f.Id)
         };
-        
+
         queryable = queryable.Skip((flightSearchDto.PageNumber - 1) * flightSearchDto.PageSize)
             .Take(flightSearchDto.PageSize);
 
-        
-       return queryable.Include(flight => flight.Tickets).ToListAsync();
+
+        return queryable.Include(flight => flight.Tickets).ToListAsync();
     }
 
     private async Task<bool> IsNotCommit()

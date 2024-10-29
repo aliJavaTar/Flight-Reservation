@@ -22,6 +22,19 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
         return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.FlightId }, flightResponse);
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemoveById(int id)
+    {
+        try
+        {
+            await addAndModify.Remove(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFlightById(int id)

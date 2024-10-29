@@ -54,4 +54,9 @@ public class AddAndModify(IFlightRepository flightRepository, FlightMapper fligh
         var updatedFlight = await flightRepository.UpdateAsync(flight);
         return flightMapper.ConvertToResponse(updatedFlight);
     }
+
+    public async Task Remove(int id)
+    {
+        await flightRepository.Remove(id);
+    }
 }
