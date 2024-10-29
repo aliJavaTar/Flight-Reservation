@@ -9,7 +9,7 @@ public class Booking(ITicketRepository ticketRepository, TicketMapper mapper)
     public async Task<TicketDto> BookingTicket(TicketBookingRequest ticketDto)
     {
         var ticket = await ticketRepository.FindByPassengerName(ticketDto.PassengerName);
-        ticket.Booking();
+        ticket.Buy();
         ticketRepository.Update();
         return mapper.ConvertToDto(ticket);
     }

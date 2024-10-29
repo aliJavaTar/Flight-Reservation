@@ -14,7 +14,7 @@ public class Ticket
     public decimal Price { get; set; }
 
 
-    public void Booking()
+    public void Buy()
     {
         if (Flight.AvailableSeats == 0)
         {
