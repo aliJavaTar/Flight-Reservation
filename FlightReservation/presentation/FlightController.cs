@@ -36,4 +36,11 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
             return NotFound(e.Message);
         }
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> GetAllFlights([FromQuery] FlightSearchDto searchDto)
+    {
+        var flightResponses = await search.GetFlight(searchDto);
+        return CreatedAtAction(nameof(GetFlightById), flightResponses);
+    }
 }

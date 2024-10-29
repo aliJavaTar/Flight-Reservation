@@ -1,4 +1,3 @@
-using FlightReservation.infra.presentation.dto;
 using FlightReservation.infra.presentation.dto.mapper;
 using FlightReservation.infra.repository;
 using FlightReservation.presentation.dto.flight;
@@ -13,9 +12,21 @@ public class Search(IFlightRepository flightRepository, FlightMapper mapper)
         return mapper.ConvertToResponse(findFlight);
     }
 
-    public async Task<List<FlightResponse>> GetFlight()
+    public async Task<List<FlightResponse>> GetFlight(FlightSearchDto request)
+
     {
-        return null;
+        var flights = await flightRepository.GetAllFlightsFilter(request);
+        return FlightResponses(flights);
     }
-    
+
+    private List<FlightResponse> FlightResponses(List<Flight> flights)
+    {
+        List<FlightResponse> flightResponses = new List<FlightResponse>();
+        foreach (var flight in flights)
+        {
+            flightResponses.Add(mapper.ConvertToResponse(flight));
+        }
+
+        return flightResponses;
+    }
 }
