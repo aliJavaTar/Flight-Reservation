@@ -1,21 +1,31 @@
-using Microsoft.AspNetCore.Authentication.Negotiate;
+using FlightReservation.domain.useCase.flight;
+using FlightReservation.domain.useCase.ticket;
+using FlightReservation.infra.data;
+using FlightReservation.infra.repository;
+using FlightReservation.infra.repository.flight;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var builderConfiguration = builder.Configuration;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-//     .AddNegotiate();
-
-// builder.Services.AddAuthorization(options =>
-// {
-//     // By default, all incoming requests will be authorized according to the default policy.
-//     options.FallbackPolicy = options.DefaultPolicy;
-// });
+builder.Services.AddControllers();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddSingleton<AddAndModify>();
+builder.Services.AddSingleton<Search>();
+builder.Services.AddSingleton<AddAndModifyTicket>();
+builder.Services.AddSingleton<Booking>();
+builder.Services.AddSingleton<Cancelling>();
 
 var app = builder.Build();
+builder.Services.AddDbContext<Db>(options =>
+    options.UseNpgsql(builderConfiguration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Flight", Version = "v1" }); });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -27,7 +37,4 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-
-
 app.Run();
-
