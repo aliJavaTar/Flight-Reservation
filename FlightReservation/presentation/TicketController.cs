@@ -6,7 +6,7 @@ namespace FlightReservation.presentation;
 
 [ApiController]
 [Route("(/tickets)")]
-public class TicketController(AddAndModifyTicket addAndModifyTicket, BuyTicket buyTicket) : ControllerBase
+public class TicketController(AddAndModifyTicket addAndModifyTicket, Booking booking , Cancelling cancelling) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> AddTicket([FromBody] TicketDto ticket)
@@ -15,10 +15,17 @@ public class TicketController(AddAndModifyTicket addAndModifyTicket, BuyTicket b
         return Ok();
     }
 
-    [HttpPut]
+    [HttpPut("/booking")]
     public async Task<IActionResult> AddTicket([FromBody] TicketBookingRequest request)
     {
-        await buyTicket.BookingTicket(request);
+        await booking.BookingTicket(request);
+        return Ok();
+    }
+
+    [HttpGet("/cancel")]
+    public async Task<IActionResult> AddTicket([FromQuery] int id)
+    {
+        await cancelling.CancelTicket(id);
         return Ok();
     }
 }

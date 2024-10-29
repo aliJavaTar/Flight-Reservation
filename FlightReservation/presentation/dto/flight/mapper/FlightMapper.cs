@@ -1,13 +1,12 @@
 using FlightReservation.domain;
-using FlightReservation.presentation.dto.flight;
 
-namespace FlightReservation.infra.presentation.dto.mapper;
+namespace FlightReservation.presentation.dto.flight.mapper;
 
 public class FlightMapper
 {
     public Flight ConvertToEntity(FlightDto flightDto)
     {
-        return new Flight.FlightBuilder()
+        return new FlightBuilder()
             .SetFlightNumber(flightDto.FlightNumber)
             .SetAvailableSeats(flightDto.AvailableSeats)
             .SetArrivalCity(flightDto.ArrivalCity)
@@ -16,18 +15,7 @@ public class FlightMapper
             .SetDepartureTime(flightDto.DepartureTime)
             .Build();
     }
-
-    // public Flight ConvertToUpdate(FlightUpdateRequest flightDto)
-    // {
-    //     return new Flight.FlightBuilder()
-    //         .SetFlightNumber(flightDto.FlightNumber)
-    //         .SetAvailableSeats(flightDto.AvailableSeats)
-    //         .SetArrivalCity(flightDto.ArrivalCity)
-    //         .SetDepartureCity(flightDto.DepartureCity)
-    //         .SetArrivalTime(flightDto.ArrivalTime)
-    //         .SetDepartureTime(flightDto.DepartureTime)
-    //         .Build();
-    // }
+    
    
     
     public FlightResponse ConvertToResponse(Flight flight)

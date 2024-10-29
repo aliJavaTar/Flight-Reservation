@@ -17,6 +17,12 @@ public class TicketRepository(Db db) : ITicketRepository
         return ticket;
     }
 
+    public async Task<Ticket> FindById(int ticketId)
+    {
+        return await db.Tickets.FindAsync(ticketId) ?? throw new NullReferenceException("Ticket not found");
+    }
+
+
     public async Task<Ticket> FindByPassengerName(string passengerName)
     {
         var ticketFound = await db.Tickets.FirstOrDefaultAsync(ticket => ticket.PassengerName == passengerName);

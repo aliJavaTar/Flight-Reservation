@@ -1,7 +1,6 @@
-using FlightReservation.infra.presentation.dto;
-using FlightReservation.infra.presentation.dto.mapper;
 using FlightReservation.infra.repository;
 using FlightReservation.presentation.dto.flight;
+using FlightReservation.presentation.dto.flight.mapper;
 
 namespace FlightReservation.domain.useCase.flight;
 
@@ -28,7 +27,7 @@ public class AddAndModify(IFlightRepository flightRepository, FlightMapper fligh
             flight.DepartureCity = flightDto.DepartureCity;
         }
 
-        Flight.IsValidCity(flight.ArrivalCity, flight.DepartureCity);
+        flight.IsValidCity(flight.ArrivalCity, flight.DepartureCity);
 
         if (flightDto.FlightNumber != null)
         {
@@ -50,7 +49,7 @@ public class AddAndModify(IFlightRepository flightRepository, FlightMapper fligh
             flight.ArrivalTime = (DateTime)flightDto.DepartureTime;
         }
 
-        Flight.CheckDepartureTimeAndArrivalTime(flight.ArrivalTime, flight.DepartureTime);
+        flight.CheckDepartureTimeAndArrivalTime(flight.ArrivalTime, flight.DepartureTime);
 
         var updatedFlight = await flightRepository.UpdateAsync(flight);
         return flightMapper.ConvertToResponse(updatedFlight);

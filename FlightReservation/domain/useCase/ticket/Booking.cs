@@ -3,7 +3,7 @@ using FlightReservation.presentation.dto.ticket;
 
 namespace FlightReservation.domain.useCase.ticket;
 
-public class BuyTicket(TicketRepository ticketRepository, TicketMapper mapper)
+public class Booking(TicketRepository ticketRepository, TicketMapper mapper)
 {
     public async Task<TicketDto> BookingTicket(TicketBookingRequest ticketDto)
     {
