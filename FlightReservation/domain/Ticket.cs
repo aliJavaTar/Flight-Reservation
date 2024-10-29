@@ -75,5 +75,10 @@ public class Ticket
             _ticket.Price = price;
             return this;
         }
+
+        public Ticket Build()
+        {
+            return _ticket;
+        }
     }
 }

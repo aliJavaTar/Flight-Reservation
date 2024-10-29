@@ -12,7 +12,7 @@ public class FlightRepository(Db db) : IFlightRepository
         await db.Flights.AddAsync(flight);
         if (await IsNotCommit())
         {
-            throw new ApplicationException("User is not created");
+            throw new Exception("Flight is not created");
         }
 
         return flight;
