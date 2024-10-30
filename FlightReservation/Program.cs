@@ -1,6 +1,5 @@
 using System.Text;
 using FlightReservation.domain.flight.usecase;
-using FlightReservation.domain.ticket;
 using FlightReservation.domain.ticket.useCase;
 using FlightReservation.infra.auth;
 using FlightReservation.infra.data;
@@ -23,7 +22,6 @@ var builderConfiguration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
 
 
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
@@ -54,7 +52,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true, // Ensures the token is intended for a specific audience
             ValidateLifetime = true, // Checks if the token has expired
             ValidateIssuerSigningKey = true, // Ensures the token is signed correctly
-            
+
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(

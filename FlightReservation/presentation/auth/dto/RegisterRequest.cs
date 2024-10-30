@@ -1,5 +1,4 @@
 using FlightReservation.infra.models;
-using FlightReservation.presentation.user;
 
 namespace FlightReservation.presentation.auth.dto;
 

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FlightReservation.presentation.user;
+namespace FlightReservation.presentation.auth.dto;
 
 public class LoginRequest
 {

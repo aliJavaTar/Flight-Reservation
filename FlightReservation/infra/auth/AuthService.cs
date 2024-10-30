@@ -4,7 +4,6 @@ using System.Text;
 using FlightReservation.infra.models;
 using FlightReservation.infra.repository;
 using FlightReservation.presentation.auth.dto;
-using FlightReservation.presentation.user;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,8 +11,6 @@ namespace FlightReservation.infra.auth;
 
 public class AuthService(IConfiguration config, IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
 {
-
-
     public async Task<string> Register(RegisterRequest register)
     {
         userRepository.UserExist(register.Username);
@@ -38,8 +35,8 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.Username ?? string.Empty),
+            new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"] ?? string.Empty));
@@ -58,6 +55,11 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
 
     private void PasswordValidation(string sentPassword, User userFound)
     {
+        if (userFound.PasswordHash is null)
+        {
+            throw new Exception("Passwords don't match");
+        }
+
         var isValid = passwordHasher.VerifyHashedPassword(userFound, userFound.PasswordHash, sentPassword)
                       == PasswordVerificationResult.Success;
 

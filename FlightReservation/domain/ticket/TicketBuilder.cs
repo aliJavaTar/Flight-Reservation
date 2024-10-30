@@ -8,34 +8,19 @@ public class TicketBuilder
 
     public TicketBuilder SetPassengerName(string passengerName)
     {
-        if (passengerName.Trim().Length < 3)
-        {
-            throw new ArgumentException("Passenger name must be at least 3 characters");
-        }
-
-        _ticket.PassengerName = passengerName;
+        _ticket.SetPassengerName(passengerName);
         return this;
     }
 
     public TicketBuilder SetPassengerEmail(string passengerEmail)
     {
-        if (passengerEmail.Trim().Length < 3 || !passengerEmail.Contains("@"))
-        {
-            throw new ArgumentException("Passenger name must be at least 3 characters");
-        }
-
-        _ticket.PassengerEmail = passengerEmail;
+        _ticket.SetPassengerEmail(passengerEmail);
         return this;
     }
 
     public TicketBuilder SetBookingDate(DateTime bookingDate)
     {
-        if (bookingDate <= DateTime.Now)
-        {
-            throw new ArgumentException("Booking date must be in the future");
-        }
-
-        _ticket.BookingDate = bookingDate;
+        _ticket.SetBookingDate(bookingDate);
         return this;
     }
 
@@ -59,7 +44,7 @@ public class TicketBuilder
 
     public TicketBuilder SetPrice(decimal price)
     {
-        _ticket.Price = price;
+        _ticket.SetPrice(price);
         return this;
     }
 
