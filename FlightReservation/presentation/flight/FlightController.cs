@@ -1,5 +1,7 @@
 using FlightReservation.domain.flight.usecase;
+using FlightReservation.infra.models;
 using FlightReservation.presentation.flight.dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightReservation.presentation.flight;
@@ -8,6 +10,7 @@ namespace FlightReservation.presentation.flight;
 [Route("api/vi/flights")]
 public class FlightController(AddAndModify addAndModify, Search search) : ControllerBase
 {
+    [Authorize(Roles = nameof(Role.Admin))]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] FlightDto dto)
     {
@@ -15,6 +18,7 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
         return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.FlightId }, flightResponse);
     }
 
+    [Authorize(Roles = nameof(Role.Admin))]
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] FlightUpdateRequest request)
     {
@@ -22,6 +26,7 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
         return CreatedAtAction(nameof(GetFlightById), new { id = flightResponse.FlightId }, flightResponse);
     }
 
+    [Authorize(Roles = nameof(Role.Admin))]
     [HttpDelete("{id}")]
     public async Task<IActionResult> RemoveById(int id)
     {
@@ -36,6 +41,7 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
         }
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFlightById(int id)
     {

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FlightReservation.infra.data;
 using FlightReservation.infra.models;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,12 @@ public class UserRepository(DataBase dataBase) : IUserRepository
         userFound = await dataBase.Users.FirstOrDefaultAsync(user => user.Email == email);
         Exist(email, userFound);
         return userFound;
+    }
+
+    public async Task<User> FindUser()
+    {
+        return await dataBase.Users.FindAsync(ClaimTypes.NameIdentifier) ??
+               throw new Exception($"User with this information  cannot be found.");
     }
 
     private void Exist(string usernameOrEmail, User? userFound)

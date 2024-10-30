@@ -1,3 +1,4 @@
+using System.Text;
 using FlightReservation.domain.flight.usecase;
 using FlightReservation.domain.ticket;
 using FlightReservation.domain.ticket.useCase;
@@ -8,7 +9,9 @@ using FlightReservation.infra.repository.flight;
 using FlightReservation.infra.repository.ticket;
 using FlightReservation.presentation.mapper;
 using FlightReservation.presentation.ticket.dto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,8 +38,30 @@ builder.Services.AddDbContext<DataBase>(options =>
 
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Flight", Version = "v1" }); });
 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true, // Ensures the token was issued by a trusted source
+            ValidateAudience = true, // Ensures the token is intended for a specific audience
+            ValidateLifetime = true, // Checks if the token has expired
+            ValidateIssuerSigningKey = true, // Ensures the token is signed correctly
+            
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? string.Empty))
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
+app.UseAuthentication(); // Ensures the JWT middleware validates tokens
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

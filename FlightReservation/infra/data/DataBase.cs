@@ -10,7 +10,6 @@ public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
 {
     public DbSet<Flight> Flights { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
-
     public DbSet<User> Users { get; set; }
 
 
@@ -19,13 +18,21 @@ public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
         base.OnModelCreating(modelBuilder);
 
 
+        UserDb(modelBuilder);
+
+        FlightDb(modelBuilder);
+
+        TicketDb(modelBuilder);
+    }
+
+    private static void UserDb(ModelBuilder modelBuilder)
+    {
         modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         modelBuilder.Entity<User>().Property(u => u.Role).IsRequired();
-        FlightDb(modelBuilder);
-
-        TicketDb(modelBuilder);
+        modelBuilder.Entity<User>().HasMany<Ticket>().WithOne(t => t.User).HasForeignKey(t => t.UserId)
+            .IsRequired();
     }
 
     private static void TicketDb(ModelBuilder modelBuilder)

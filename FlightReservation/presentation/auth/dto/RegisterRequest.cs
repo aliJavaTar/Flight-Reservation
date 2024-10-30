@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using FlightReservation.infra.models;
+using FlightReservation.presentation.user;
 
-namespace FlightReservation.presentation.user;
+namespace FlightReservation.presentation.auth.dto;
 
 public class RegisterRequest : LoginRequest
 {

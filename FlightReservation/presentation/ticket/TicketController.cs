@@ -1,5 +1,8 @@
 using FlightReservation.domain.ticket.useCase;
+using FlightReservation.infra.models;
 using FlightReservation.presentation.ticket.dto;
+using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightReservation.presentation.ticket;
@@ -17,12 +20,14 @@ public class TicketController(AddAndModifyTicket addAndModifyTicket, Booking boo
     }
 
     [HttpPut]
+    [Authorize(Roles = nameof(Role.Customer))]
     public async Task<IActionResult> Booking([FromBody] TicketBookingRequest request)
     {
         await booking.BookingTicket(request);
         return Ok();
     }
 
+    [Authorize(Roles = nameof(Role.Customer))]
     [HttpGet("{id}")]
     public async Task<IActionResult> Cancel(int id)
     {

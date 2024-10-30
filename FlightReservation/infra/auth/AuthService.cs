@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using FlightReservation.infra.models;
 using FlightReservation.infra.repository;
+using FlightReservation.presentation.auth.dto;
 using FlightReservation.presentation.user;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -36,6 +37,7 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
     {
         var claims = new[]
         {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString())

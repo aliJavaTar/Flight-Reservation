@@ -5,4 +5,5 @@ public class TicketBookingRequest(int flightId, string passengerName, string pas
     public required int FlightId = flightId;
     public required string PassengerName = passengerName;
     public required string PassengerEmail = passengerEmail;
+    
 }

@@ -1,4 +1,5 @@
 using FlightReservation.infra.auth;
+using FlightReservation.presentation.auth.dto;
 using FlightReservation.presentation.user;
 using Microsoft.AspNetCore.Mvc;
 

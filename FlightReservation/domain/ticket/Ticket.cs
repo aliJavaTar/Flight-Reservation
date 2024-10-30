@@ -1,4 +1,5 @@
 using FlightReservation.domain.flight;
+using FlightReservation.infra.models;
 
 namespace FlightReservation.domain.ticket;
 
@@ -13,6 +14,8 @@ public class Ticket
     public Status Status { get; set; }
     public decimal Price { get; set; }
 
+    public int UserId { get; set; }
+    public User? User { get; set; }
 
     public void Buy()
     {
