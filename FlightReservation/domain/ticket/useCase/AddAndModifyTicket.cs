@@ -10,11 +10,11 @@ public class AddAndModifyTicket(
     TicketMapper mapper,
     IFlightRepository flightRepository)
 {
-    public async Task<Ticket> AddTicket(TicketDto dto)
+    public async Task AddTicket(TicketDto dto)
     {
         var flight = await flightRepository.FindById(dto.FlightId);
         var ticket = mapper.ConvertToEntity(dto);
         ticket.Flight = flight;
-        return await ticketRepository.Add(ticket);
+        await ticketRepository.Add(ticket);
     }
 }
