@@ -1,4 +1,6 @@
-namespace FlightReservation.domain;
+using FlightReservation.domain.ticket;
+
+namespace FlightReservation.domain.flight;
 
 public class Flight
 {

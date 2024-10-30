@@ -1,4 +1,5 @@
 using FlightReservation.domain;
+using FlightReservation.domain.flight;
 using FlightReservation.presentation.dto.flight;
 
 namespace FlightReservation.infra.repository.flight;

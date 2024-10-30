@@ -1,5 +1,6 @@
-using FlightReservation.domain.useCase.flight;
-using FlightReservation.domain.useCase.ticket;
+using FlightReservation.domain.flight.usecase;
+using FlightReservation.domain.ticket;
+using FlightReservation.domain.ticket.useCase;
 using FlightReservation.infra.data;
 using FlightReservation.infra.repository;
 using FlightReservation.infra.repository.flight;

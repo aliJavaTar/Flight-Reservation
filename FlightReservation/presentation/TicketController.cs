@@ -1,4 +1,4 @@
-using FlightReservation.domain.useCase.ticket;
+using FlightReservation.domain.ticket.useCase;
 using FlightReservation.presentation.dto.ticket;
 using Microsoft.AspNetCore.Mvc;
 

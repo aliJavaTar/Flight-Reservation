@@ -1,4 +1,5 @@
 using FlightReservation.domain;
+using FlightReservation.domain.ticket;
 
 namespace FlightReservation.infra.repository;
 

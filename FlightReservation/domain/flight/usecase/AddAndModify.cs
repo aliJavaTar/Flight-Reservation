@@ -1,9 +1,8 @@
-using FlightReservation.infra.repository;
 using FlightReservation.infra.repository.flight;
 using FlightReservation.presentation.dto.flight;
 using FlightReservation.presentation.dto.flight.mapper;
 
-namespace FlightReservation.domain.useCase.flight;
+namespace FlightReservation.domain.flight.usecase;
 
 public class AddAndModify(IFlightRepository flightRepository, FlightMapper flightMapper)
 {

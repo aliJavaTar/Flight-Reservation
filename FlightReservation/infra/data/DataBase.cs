@@ -1,4 +1,6 @@
 using FlightReservation.domain;
+using FlightReservation.domain.flight;
+using FlightReservation.domain.ticket;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.data;

@@ -1,6 +1,6 @@
 using FlightReservation.infra.repository;
 
-namespace FlightReservation.domain.useCase.ticket;
+namespace FlightReservation.domain.ticket.useCase;
 
 public class Cancelling(ITicketRepository ticketRepository)
 {

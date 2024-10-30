@@ -1,7 +1,7 @@
 using FlightReservation.infra.repository;
 using FlightReservation.presentation.dto.ticket;
 
-namespace FlightReservation.domain.useCase.ticket;
+namespace FlightReservation.domain.ticket.useCase;
 
 public class Booking(ITicketRepository ticketRepository, TicketMapper mapper)
 {
