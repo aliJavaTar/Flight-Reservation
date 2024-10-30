@@ -44,8 +44,9 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
 
 
         var token = new JwtSecurityToken(
-            issuer: config["Jwt:Issuer"],
-            audience: config["Jwt:Audience"],
+            //TODO remove this comment
+            // issuer: config["Jwt:Issuer"],
+            // audience: config["Jwt:Audience"],
             claims: claims,
             expires: DateTime.Now.AddHours(1),
             signingCredentials: creeds);

@@ -31,8 +31,7 @@ public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         modelBuilder.Entity<User>().Property(u => u.Role).IsRequired();
-        modelBuilder.Entity<User>().HasMany<Ticket>().WithOne(t => t.User).HasForeignKey(t => t.UserId)
-            .IsRequired();
+        modelBuilder.Entity<User>().HasMany<Ticket>().WithOne(t => t.User).HasForeignKey(t => t.UserId);
     }
 
     private static void TicketDb(ModelBuilder modelBuilder)

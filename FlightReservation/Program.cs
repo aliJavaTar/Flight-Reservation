@@ -48,8 +48,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true, // Ensures the token was issued by a trusted source
-            ValidateAudience = true, // Ensures the token is intended for a specific audience
+            //todo change it true 
+            ValidateIssuer = false, // Ensures the token was issued by a trusted source 
+            ValidateAudience = false, // Ensures the token is intended for a specific audience
             ValidateLifetime = true, // Checks if the token has expired
             ValidateIssuerSigningKey = true, // Ensures the token is signed correctly
 
@@ -74,7 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();
-
+app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
