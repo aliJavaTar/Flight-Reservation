@@ -4,12 +4,14 @@ using FlightReservation.domain.ticket;
 using FlightReservation.domain.ticket.useCase;
 using FlightReservation.infra.auth;
 using FlightReservation.infra.data;
+using FlightReservation.infra.models;
 using FlightReservation.infra.repository;
 using FlightReservation.infra.repository.flight;
 using FlightReservation.infra.repository.ticket;
 using FlightReservation.presentation.mapper;
 using FlightReservation.presentation.ticket.dto;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -21,9 +23,13 @@ var builderConfiguration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+
+
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AddAndModify>();
 builder.Services.AddScoped<Search>();
