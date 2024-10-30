@@ -14,10 +14,8 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
     public async Task<string> Register(RegisterRequest register)
     {
         userRepository.UserExist(register.Username);
-
         var user = new User(register.Email, register.Username, register.Role);
         user.PasswordHash = passwordHasher.HashPassword(user, register.Password);
-        Console.Write(user);
         await userRepository.Create(user);
 
         return GenerateJwtToken(user);
@@ -38,7 +36,6 @@ public class AuthService(IConfiguration config, IUserRepository userRepository, 
             new Claim(ClaimTypes.Name, user.Username ?? string.Empty),
             new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
             new Claim(ClaimTypes.Role, user.Role.ToString())
-            
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"] ?? string.Empty));
         var creeds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

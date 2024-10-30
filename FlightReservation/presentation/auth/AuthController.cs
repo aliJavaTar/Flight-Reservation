@@ -11,10 +11,17 @@ public class AuthController(AuthService authService) : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var result = await authService.Register(request);
-        return Ok(result);
+        try
+        {
+            var result = await authService.Register(request);
+            return Ok(result);
+        }
+        catch (InvalidOperationException e)
+        {
+            return BadRequest("invalid request");
+        }
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {

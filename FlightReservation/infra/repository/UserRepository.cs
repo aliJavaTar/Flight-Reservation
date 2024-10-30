@@ -1,6 +1,8 @@
+using System.Net;
 using System.Security.Claims;
 using FlightReservation.infra.data;
 using FlightReservation.infra.models;
+using FlightReservation.presentation.auth.dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository;
@@ -9,16 +11,17 @@ public class UserRepository(DataBase dataBase) : IUserRepository
 {
     public async void UserExist(string? username)
     {
-        if (username is null)
-        {
-            throw new Exception("Username cannot be null");
-        }
+        ArgumentNullException.ThrowIfNull(username);
+
 
         var userExist = await dataBase.Users.FirstOrDefaultAsync(user => user.Username == username);
+
+
         if (userExist is not null)
         {
-            throw new Exception($"User with username {username} already exists.");
+            throw new InvalidOperationException($"User with username {username} already exists.");
         }
+        
     }
 
     public async Task Create(User user)
