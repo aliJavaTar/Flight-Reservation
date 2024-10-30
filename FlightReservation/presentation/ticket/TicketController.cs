@@ -1,5 +1,6 @@
 using FlightReservation.domain.ticket.useCase;
 using FlightReservation.infra.models;
+using FlightReservation.Middlewares;
 using FlightReservation.presentation.ticket.dto;
 using Humanizer;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace FlightReservation.presentation.ticket;
 [ApiController]
 [Route("tickets")]
 public class TicketController(AddAndModifyTicket addAndModifyTicket, Booking booking, Cancelling cancelling)
-    : ControllerBase
+    : BaseController
 {
     [HttpPost]
     public async Task<IActionResult> AddTicket([FromBody] TicketDto ticket)

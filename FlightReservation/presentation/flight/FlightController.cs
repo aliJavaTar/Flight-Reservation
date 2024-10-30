@@ -1,5 +1,7 @@
 using FlightReservation.domain.flight.usecase;
+using FlightReservation.Exceptions;
 using FlightReservation.infra.models;
+using FlightReservation.Middlewares;
 using FlightReservation.presentation.flight.dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +10,7 @@ namespace FlightReservation.presentation.flight;
 
 [ApiController]
 [Route("api/vi/flights")]
-public class FlightController(AddAndModify addAndModify, Search search) : ControllerBase
+public class FlightController(AddAndModify addAndModify, Search search) : BaseController
 {
     [Authorize(Roles = nameof(Role.Admin))]
     [HttpPost]
@@ -61,5 +63,10 @@ public class FlightController(AddAndModify addAndModify, Search search) : Contro
     {
         var flightResponses = await search.GetFlight(searchDto);
         return CreatedAtAction(nameof(GetFlightById), flightResponses);
+    }
+    [HttpGet("ExceptionSample")]
+    public IActionResult GetAllFlights()
+    {
+        throw new MeladException();
     }
 }

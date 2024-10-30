@@ -7,6 +7,7 @@ using FlightReservation.infra.models;
 using FlightReservation.infra.repository;
 using FlightReservation.infra.repository.flight;
 using FlightReservation.infra.repository.ticket;
+using FlightReservation.Middlewares;
 using FlightReservation.presentation.mapper;
 using FlightReservation.presentation.ticket.dto;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,6 +65,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+app.UseCustomExceptionHandler();
 
 app.UseAuthentication(); // Ensures the JWT middleware validates tokens
 app.UseAuthorization();
