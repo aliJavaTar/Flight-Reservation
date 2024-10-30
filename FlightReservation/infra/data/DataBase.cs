@@ -27,8 +27,19 @@ public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
 
     private static void UserDb(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
-        modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+        modelBuilder.Entity<User>(user =>
+        {
+            user.Property(x => x.Username).IsRequired();
+            user.HasIndex(u => u.Username).IsUnique();
+        });
+
+        modelBuilder.Entity<User>(user =>
+        {
+            user.Property(u => u.Email).IsRequired();
+            user.HasIndex(u => u.Email).IsUnique();
+        });
+
+        // modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         modelBuilder.Entity<User>().Property(u => u.Role).IsRequired();
         modelBuilder.Entity<User>().HasMany<Ticket>().WithOne(t => t.User).HasForeignKey(t => t.UserId);
@@ -51,7 +62,11 @@ public class DataBase(DbContextOptions<DataBase> options) : DbContext(options)
             .HasForeignKey(t => t.FlightId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Flight>().HasIndex().IsUnique();
+        modelBuilder.Entity<Flight>(flight =>
+        {
+            flight.Property(f => f.FlightNumber).IsRequired();
+            flight.HasIndex(f => f.FlightNumber).IsUnique();
+        });
         modelBuilder.Entity<Flight>().Property(f => f.DepartureCity).IsRequired();
         modelBuilder.Entity<Flight>().Property(f => f.ArrivalCity).IsRequired();
         modelBuilder.Entity<Flight>().Property(f => f.DepartureTime).IsRequired();

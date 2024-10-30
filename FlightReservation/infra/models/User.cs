@@ -7,17 +7,18 @@ public class User(string? email, string? username, Role role)
 {
     public int Id { get; set; }
 
-    [MaxLength(20)] [MinLength(5)] public string? Username { get; set; }
+    [MaxLength(20)] [MinLength(5)]
+    public string? Username { get; set; } = username;
 
     [EmailAddress]
     [MaxLength(100, ErrorMessage = "email is no more than 100 characters")]
-    public string? Email { get; set; }
+    public string? Email { get; set; } = email;
 
     [MaxLength(100, ErrorMessage = "password must be between 8 and 100 characters")]
     [MinLength(8)]
     public string? PasswordHash { get; set; }
 
-    public Role Role { get; set; }
+    public Role Role { get; set; } = role;
 
     public int TicketId { get; set; }
 
