@@ -1,6 +1,6 @@
 using FlightReservation.domain;
 using FlightReservation.domain.flight;
-using FlightReservation.presentation.dto.flight;
+using FlightReservation.presentation.flight.dto;
 
 namespace FlightReservation.infra.repository.flight;
 

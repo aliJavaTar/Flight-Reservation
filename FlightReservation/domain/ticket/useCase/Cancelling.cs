@@ -1,4 +1,5 @@
 using FlightReservation.infra.repository;
+using FlightReservation.infra.repository.ticket;
 
 namespace FlightReservation.domain.ticket.useCase;
 

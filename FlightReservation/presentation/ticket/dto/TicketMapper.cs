@@ -1,7 +1,6 @@
-using FlightReservation.domain;
 using FlightReservation.domain.ticket;
 
-namespace FlightReservation.presentation.dto.ticket;
+namespace FlightReservation.presentation.ticket.dto;
 
 public class TicketMapper
 {

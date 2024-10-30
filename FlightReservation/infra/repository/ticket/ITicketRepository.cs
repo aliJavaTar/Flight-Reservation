@@ -1,7 +1,6 @@
-using FlightReservation.domain;
 using FlightReservation.domain.ticket;
 
-namespace FlightReservation.infra.repository;
+namespace FlightReservation.infra.repository.ticket;
 
 public interface ITicketRepository
 {

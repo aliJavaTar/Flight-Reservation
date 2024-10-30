@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FlightReservation.presentation.dto.ticket;
+namespace FlightReservation.presentation.ticket.dto;
 
 public class TicketDto
 {

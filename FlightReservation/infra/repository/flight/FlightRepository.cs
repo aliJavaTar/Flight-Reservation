@@ -1,7 +1,8 @@
 using FlightReservation.domain;
 using FlightReservation.domain.flight;
 using FlightReservation.infra.data;
-using FlightReservation.presentation.dto.flight;
+using FlightReservation.presentation.flight;
+using FlightReservation.presentation.flight.dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservation.infra.repository.flight;

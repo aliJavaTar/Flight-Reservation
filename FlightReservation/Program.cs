@@ -4,8 +4,9 @@ using FlightReservation.domain.ticket.useCase;
 using FlightReservation.infra.data;
 using FlightReservation.infra.repository;
 using FlightReservation.infra.repository.flight;
-using FlightReservation.presentation.dto.flight.mapper;
-using FlightReservation.presentation.dto.ticket;
+using FlightReservation.infra.repository.ticket;
+using FlightReservation.presentation.mapper;
+using FlightReservation.presentation.ticket.dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -20,7 +21,7 @@ builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<AddAndModify>();
 builder.Services.AddScoped<Search>();
-builder.Services.AddScoped<FlightMapper>(); // Register FlightMapper
+builder.Services.AddScoped<FlightMapper>(); 
 builder.Services.AddScoped<TicketMapper>(); 
 builder.Services.AddScoped<AddAndModifyTicket>();
 builder.Services.AddScoped<Booking>();

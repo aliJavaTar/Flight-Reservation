@@ -1,9 +1,8 @@
-using FlightReservation.domain;
 using FlightReservation.domain.ticket;
 using FlightReservation.infra.data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlightReservation.infra.repository;
+namespace FlightReservation.infra.repository.ticket;
 
 public class TicketRepository(DataBase dataBase) : ITicketRepository
 {

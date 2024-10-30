@@ -1,8 +1,8 @@
 using FlightReservation.domain.ticket.useCase;
-using FlightReservation.presentation.dto.ticket;
+using FlightReservation.presentation.ticket.dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlightReservation.presentation;
+namespace FlightReservation.presentation.ticket;
 
 [ApiController]
 [Route("tickets")]

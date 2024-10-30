@@ -1,7 +1,7 @@
-using FlightReservation.domain;
 using FlightReservation.domain.flight;
+using FlightReservation.presentation.flight.dto;
 
-namespace FlightReservation.presentation.dto.flight.mapper;
+namespace FlightReservation.presentation.mapper;
 
 public class FlightMapper
 {

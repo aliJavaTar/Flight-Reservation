@@ -1,4 +1,4 @@
-namespace FlightReservation.presentation.dto.flight;
+namespace FlightReservation.presentation.flight;
 
 public enum SortOrder
 {
